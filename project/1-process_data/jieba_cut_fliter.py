@@ -9,9 +9,13 @@ import jieba.analyse
 import time
 import jieba
 import jieba.posseg
-import os, sys
+import os
+import sys
+WORK_DIR = '/Users/gaobellen/WorkSpace/sourcedata/sougou-user-profile'
 reload(sys)
 sys.setdefaultencoding('utf8')
+
+
 def input(trainname):
     traindata = []
     with open(trainname, 'rb') as f:
@@ -23,29 +27,29 @@ def input(trainname):
                 count += 1
             except:
                 print "error:", line, count
-            line=f.readline()
+            line = f.readline()
     return traindata
 start = time.clock()
 
-filepath = 'train.csv'
+filepath = os.path.join(WORK_DIR, 'train_querylist.csv')
 QueryList = input(filepath)
 
-writepath = 'writefile.csv'
+writepath = os.path.join(WORK_DIR, 'train_querylist_cut_result.csv')
 csvfile = open(writepath, 'w')
-#parallel:speed up
+# parallel:speed up
 jieba.enable_parallel()
 POS = {}
 for i in range(len(QueryList)):
     s = []
     str = ""
-    words = jieba.posseg.cut(QueryList[i])# 带有词性的精确分词模式
-    allowPOS = ['n','v','j']
+    words = jieba.posseg.cut(QueryList[i])  # 带有词性的精确分词模式
+    allowPOS = ['n', 'v', 'j']
     for word, flag in words:
-        POS[flag]=POS.get(flag,0)+1
-        if (flag[0] in allowPOS) and len(word)>=2:
+        POS[flag] = POS.get(flag, 0) + 1
+        if (flag[0] in allowPOS) and len(word) >= 2:
             str += word + " "
     s.append(str.encode('utf8'))
-    csvfile.write(" ".join(s)+'\n')
+    csvfile.write(" ".join(s) + '\n')
 csvfile.close()
 print POS
 

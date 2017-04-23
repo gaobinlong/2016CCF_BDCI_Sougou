@@ -7,28 +7,28 @@ csvfile表示了生成文件的信息
 """
 import csv
 
-add = 'user_tag_query.10W.TRAIN' #path of the original train file
+# add = '/Users/gaobellen/WorkSpace/sourcedata/sougou-user-profile/user_tag_query.10W.TRAIN' #path of the original train file
+#
+# csvfile = file(add + '.csv', 'wb')# the path of the generated train file
+# writer = csv.writer(csvfile)
+# writer.writerow(['ID', 'age', 'Gender', 'Education', 'QueryList'])
+# with open(add, 'r') as f:
+#     for line in f:
+#         line.strip()
+#         data = line.split("\t")
+#         writedata = [data[0], data[1], data[2], data[3]]
+#         querystr = ''
+#         data[-1]=data[-1][:-1]
+#         for d in data[4:]:
+#            try:
+#                 querystr += d.decode('GB18030').encode('utf8') + '\t'
+#            except:
+#                print data[0],querystr
+#         querystr = querystr[:-1]
+#         writedata.append(querystr)
+#         writer.writerow(writedata)
 
-csvfile = file(add + '.csv', 'wb')# the path of the generated train file
-writer = csv.writer(csvfile)
-writer.writerow(['ID', 'age', 'Gender', 'Education', 'QueryList'])
-with open(add, 'r') as f:
-    for line in f:
-        line.strip()
-        data = line.split("\t")
-        writedata = [data[0], data[1], data[2], data[3]]
-        querystr = ''
-        data[-1]=data[-1][:-1]
-        for d in data[4:]:
-           try:
-                querystr += d.decode('GB18030').encode('utf8') + '\t'
-           except:
-               print data[0],querystr
-        querystr = querystr[:-1]
-        writedata.append(querystr)
-        writer.writerow(writedata)
-
-add = 'user_tag_query.10W.TEST'#path of the original test file
+add = '/Users/gaobellen/WorkSpace/sourcedata/sougou-user-profile/user_tag_query.10W.TEST'#path of the original test file
 
 csvfile = file(add + '.csv', 'wb')# the path of the generated test file
 writer = csv.writer(csvfile)
@@ -47,4 +47,3 @@ with open(add, 'r') as f:
         querystr = querystr[:-1]
         writedata.append(querystr)
         writer.writerow(writedata)
-
